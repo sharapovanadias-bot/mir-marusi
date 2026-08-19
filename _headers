@@ -11,6 +11,9 @@
 /assets/img/*
   Cache-Control: public, max-age=2592000
 
+/assets/*.pdf
+  Cache-Control: public, max-age=2592000
+
 /assets/css/*
   Cache-Control: public, max-age=3600, must-revalidate
 
