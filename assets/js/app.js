@@ -449,8 +449,15 @@ function initProduct(){
   document.title = `${p.title} — купить ${NOUN[p.type]||'товар'} для детей 6–9 лет | Мир Маруси`;
   const md=$('meta[name="description"]'); if(md) md.content = `${p.title}. ${p.desc} Возраст ${p.age} лет, ${p.format}. Мир Маруси — книги, дневники, раскраски и игры для детей 6–9 лет.`;
   const ogt=$('meta[property="og:title"]'); if(ogt) ogt.content=document.title;
+  const SITE='https://mir-marusi.ai-business-lab.workers.dev';
+  let cn=$('link[rel="canonical"]');
+  if(!cn){ cn=document.createElement('link'); cn.rel='canonical'; document.head.appendChild(cn); }
+  cn.href=`${SITE}/product?id=${encodeURIComponent(p.id)}`;
+  let ogu=$('meta[property="og:url"]');
+  if(!ogu){ ogu=document.createElement('meta'); ogu.setAttribute('property','og:url'); document.head.appendChild(ogu); }
+  ogu.content=cn.href;
   const ogd=$('meta[property="og:description"]'); if(ogd) ogd.content=md?md.content:'';
-  const ogi=$('meta[property="og:image"]'); if(ogi) ogi.content=p.cover;
+  const ogi=$('meta[property="og:image"]'); if(ogi) ogi.content=`${SITE}/${p.cover}`;
 
   const soon = p.status==='soon';
   const gal = p.gallery && p.gallery.length ? p.gallery : [p.cover];

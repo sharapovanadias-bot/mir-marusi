@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /docs/
 
-Sitemap: https://mirmarusi.example/sitemap.xml
+Sitemap: https://mir-marusi.ai-business-lab.workers.dev/sitemap.xml
