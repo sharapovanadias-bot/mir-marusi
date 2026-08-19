@@ -21,48 +21,20 @@ Git-репозиторий готов, конфиги кэширования н�
 
 ---
 
-# ШАГ 1. Создать репозиторий на GitHub
+# ШАГИ 1–3. GitHub — ✅ УЖЕ СДЕЛАНО
 
-1. Открыть **https://github.com/new**
-2. **Repository name**: `mir-marusi`
-3. Видимость: **Private** или Public — Cloudflare Pages работает с обоими
-   на бесплатном тарифе
-4. ⚠️ **НЕ ставить галочки** «Add a README», «Add .gitignore», «Choose a license» —
-   репозиторий должен быть пустым, иначе push упрётся в конфликт
-5. **Create repository**
+Код загружен: **https://github.com/sharapovanadias-bot/mir-marusi**
+114 файлов, ветка `main`, 8 коммитов. Репозиторий публичный.
 
-# ШАГ 2. Получить токен доступа
+⚠️ **Токен из переписки нужно отозвать** — он засветился в чате.
+https://github.com/settings/personal-access-tokens → `mir-marusi-deploy` → **Delete**.
+Сделать это можно сразу: для Cloudflare Pages токен не нужен, там своя авторизация
+через кнопку «Connect to Git».
 
-Пароль GitHub при пуше не принимает — нужен токен.
+Токен в настройках репозитория не сохранён — я убрал его из `git remote` сразу
+после загрузки.
 
-1. Открыть **https://github.com/settings/personal-access-tokens/new**
-   (Settings → Developer settings → Personal access tokens → Fine-grained)
-2. **Token name**: `mir-marusi-deploy`
-3. **Expiration**: на ваше усмотрение (90 дней — разумно)
-4. **Repository access** → *Only select repositories* → выбрать `mir-marusi`
-5. **Permissions** → Repository permissions → **Contents: Read and write**
-6. **Generate token** и **скопировать** — показывается ровно один раз
-
-# ШАГ 3. Отправить код на GitHub
-
-Подставьте свой логин и выполните. Команда спросит логин, затем пароль —
-**вместо пароля вставьте токен из шага 2**:
-
-```bash
-cd /home/user/mir-marusi
-git remote add origin https://github.com/ВАШ_ЛОГИН/mir-marusi.git
-git push -u origin main
-```
-
-Если хотите обойтись без ввода — можно вшить токен прямо в адрес
-(учтите: он останется в конфиге репозитория):
-
-```bash
-git remote add origin https://ВАШ_ЛОГИН:ТОКЕН@github.com/ВАШ_ЛОГИН/mir-marusi.git
-git push -u origin main
-```
-
-Проверка: обновите страницу репозитория — там должны появиться 15 HTML-файлов и папка `assets`.
+---
 
 # ШАГ 4. Подключить Cloudflare Pages
 
