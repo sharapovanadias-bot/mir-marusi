@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Мир Маруси — книги, дневники, раскраски и игры для девочек 6–9 лет</title>
+<meta name="description" content="Мир Маруси — детские книги, дневники, раскраски, workbook, игры и подарки для девочек 6–9 лет. Познакомьтесь с Марусей, её друзьями и удивительным миром приключений.">
+<meta name="keywords" content="книги для девочек 6 лет, книги для девочек 7 лет, книги для девочек 8 лет, книги для девочек 9 лет, детские книги, дневник для девочки, детский дневник, раскраска для девочки, развивающие задания для детей, подарки девочке 7 лет">
+<link rel="canonical" href="https://mirmarusi.example/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Мир Маруси — книги, дневники, раскраски и игры для девочек 6–9 лет">
+<meta property="og:description" content="Это не просто книги. Это мир, в который можно войти.">
+<meta property="og:image" content="assets/img/story/cover.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23F3DDDA'/><circle cx='26' cy='30' r='3' fill='%237A5842'/><circle cx='38' cy='30' r='3' fill='%237A5842'/><path d='M27 38q5 4 10 0' stroke='%237A5842' stroke-width='2.4' fill='none' stroke-linecap='round'/></svg>">
+<link rel="preload" href="assets/fonts/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/neucha.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Brand","name":"Мир Маруси",
+"description":"Детские книги, дневники, раскраски, workbook, игры и подарки для детей 6–9 лет.",
+"url":"https://mirmarusi.example/","logo":"https://mirmarusi.example/assets/img/story/cover.jpg"}
+</script>
+</head>
+<body data-page="index.html">
+<div id="header-slot"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <span class="eyebrow">Книги · дневники · игры для 6–9 лет</span>
+        <h1><span class="hand">Привет!</span> Я <span class="underline-sketch">Маруся</span>.</h1>
+        <p class="lead">Это мой мир. Здесь происходят приключения, рождаются секреты, появляются лучшие друзья и иногда случается настоящий школьный хаос.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="world.html">Войти в мир Маруси</a>
+          <a class="btn btn--ghost btn--lg" href="about.html">Познакомиться с Марусей</a>
+        </div>
+        <div class="destinations">
+          <div class="destinations__title">Куда сегодня отправится Маруся?</div>
+          <div class="dest-list" id="dest-list"></div>
+        </div>
+        <div class="hero__note">
+          <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
+          <span>Серия «Дневник Маруси» · Доставка по России · Возврат 14 дней</span>
+        </div>
+      </div>
+      <div class="hero__stage" id="hero-stage"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЗНАКОМСТВО ============ -->
+<section class="section" id="meet">
+  <div class="wrap">
+    <div class="meet">
+      <div class="meet__img reveal">
+        <img src="assets/img/story/n01_obeshanie.jpg" alt="Маруся — героиня детских книг для 6–9 лет">
+        <span class="sticker sticker--1">7 лет</span>
+        <span class="sticker sticker--2">и один Коричка</span>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Познакомься</span>
+        <h2>А это — я. Маруся.</h2>
+        <p class="lead">Я задаю очень много вопросов. Взрослые говорят, что слишком. Но как ещё узнать, почему луна идёт за нами до самого дома?</p>
+        <div class="facts">
+          <div class="fact fact--pink"><div class="fact__label">Люблю</div><p>Придумывать истории, задавать вопросы, приключения.</p></div>
+          <div class="fact fact--blue"><div class="fact__label">Не люблю</div><p>Скучать и когда взрослые говорят: «Потом».</p></div>
+          <div class="fact fact--sage"><div class="fact__label">Моя суперсила</div><p>Замечать то, чего другие не замечают.</p></div>
+          <div class="fact fact--sun"><div class="fact__label">Мой лучший друг</div><p>Коричка. Ёжик, который однажды уехал со мной в школу.</p></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn--primary" href="about.html">Читать историю Маруси</a>
+          <a class="btn btn--ghost" href="characters.html">Все персонажи</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КАРТА МИРА ============ -->
+<section class="section" id="world">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Интерактивная карта</span>
+        <h2>Мир Маруси</h2>
+        <p class="lead">Шесть мест, где всё происходит. Загляни в любое — там всегда что-то случилось.</p>
+      </div>
+      <a class="btn btn--ghost" href="world.html">Открыть карту целиком</a>
+    </div>
+    <div class="map reveal">
+      <div class="map__grid" id="map-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КНИГИ ============ -->
+<section class="section" id="books">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Книги</span>
+        <h2>Истории, в которые <br>хочется возвращаться</h2>
+      </div>
+      <a class="btn btn--ghost" href="books.html">Все книги</a>
+    </div>
+    <div class="grid grid--4" id="home-books"></div>
+  </div>
+</section>
+
+<!-- ============ ЗИМА МАРУСИ ============ -->
+<section class="section" id="winter">
+  <div class="wrap">
+    <div class="bookspread reveal">
+      <div>
+        <span class="eyebrow">Книга вторая</span>
+        <h2>Зима Маруси</h2>
+        <p class="lead">Зима пришла — а вместе с ней вторая тетрадка Маруси. Новогодний праздник в классе, спектакль, где Вова стал самым громким Дедом Морозом на свете, снежинки, похожие на картошку, и снежная крепость, которая стала настоящим замком.</p>
+        <ul class="bookspread__toc">
+          <li>Как мы начали ждать Новый год</li>
+          <li>Как Вова получил бороду и сразу её потерял</li>
+          <li>Как мы построили снеговика, который прожил меньше часа</li>
+          <li>Как я впервые пошла гулять сама</li>
+          <li>Как я решила, что Лиза мне не нравится, — а потом поняла, что почти ничего о ней не знаю</li>
+        </ul>
+        <p class="muted" style="font-size:.9rem;margin:0 0 18px">160 страниц · 148×210 мм · для младшего школьного возраста</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="product.html?id=book-two">Подробнее о книге</a>
+          <a class="btn btn--ghost btn--lg" href="characters.html">Кто есть кто</a>
+        </div>
+      </div>
+      <div class="bookspread__covers">
+        <img class="bookspread__cover" src="assets/img/winter/cover-winter.jpg" alt="Обложка книги «Зима Маруси» — Маруся и ёжик Коричка в красном рюкзаке" loading="lazy" decoding="async" width="848" height="1203">
+        <img class="bookspread__peek" src="assets/img/winter/snowflakes-night.jpg" alt="Разворот книги: Маруся вырезает снежинки вместе с Коричкой" loading="lazy" decoding="async" width="609" height="609">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КАРАКУЛИ ИЗ КНИГИ ============ -->
+<section class="doodles" aria-label="Рисунки со страниц книги">
+  <span class="doodles__fade doodles__fade--l"></span>
+  <span class="doodles__fade doodles__fade--r"></span>
+  <div class="doodles__track">
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-01.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-02.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-03.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-04.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-05.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-06.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-07.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-08.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-09.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-10.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-11.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-12.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-13.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item"><img src="assets/img/doodles/doodle-14.jpg" alt="Рисунок со страниц книги «Зима Маруси»" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-01.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-02.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-03.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-04.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-05.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-06.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-07.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-08.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-09.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-10.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-11.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-12.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-13.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+      <figure class="doodles__item" aria-hidden="true"><img src="assets/img/doodles/doodle-14.jpg" alt="" loading="lazy" decoding="async" width="900" height="490"></figure>
+  </div>
+  <p class="doodles__cap wrap">Так Маруся рисует на полях своего дневника</p>
+</section>
+
+<!-- ============ ДНЕВНИКИ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <span class="eyebrow">Дневники</span>
+        <h2>Теперь история Маруси <br>может стать твоей.</h2>
+        <p class="lead">Дневник начинается там, где заканчивается книга. Внутри — вопросы, анкеты, задания, страницы для рисунков и один секретный разворот, о котором знаешь только ты.</p>
+        <div class="age-pills" style="margin:18px 0">
+          <span class="age-pill">Анкеты</span><span class="age-pill">Вопрос дня</span>
+          <span class="age-pill">Страницы для рисунков</span><span class="age-pill">Секретные страницы</span>
+          <span class="age-pill">Кармашек для записок</span>
+        </div>
+        <a class="btn btn--primary btn--lg" href="diaries.html">Создать свой дневник</a>
+      </div>
+      <div class="diary-preview reveal">
+        <span class="tape"></span>
+        <h4>Вторник, самый обычный</h4>
+        <ul>
+          <li>Сегодня я узнала, что…</li>
+          <li>Больше всего я смеялась, когда…</li>
+          <li>Мой секрет на сегодня:</li>
+          <li>Если бы я была взрослой, я бы…</li>
+        </ul>
+        <p class="muted" style="font-size:.85rem;margin-top:1rem">Так будет выглядеть разворот дневника-анкеты «Мой дневник как у Маруси». Готовим к выпуску.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ПИСЬМО + ЗАДАНИЕ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="duo-blocks">
+      <div class="letter reveal">
+        <span class="tape tape--l"></span>
+        <span class="eyebrow">Послание от Маруси</span>
+        <div class="letter__text" id="letter-text"><span>Нажми на кнопку — и Маруся напишет тебе письмо. Она пишет по-разному: иногда смешно, иногда очень серьёзно.</span></div>
+        <div class="letter__sign">— Маруся</div>
+        <button class="btn btn--sun btn--lg" id="letter-btn" style="align-self:flex-start;margin-top:14px">Получить письмо от Маруси</button>
+      </div>
+      <div class="task reveal">
+        <span class="eyebrow">Задание Маруси на сегодня</span>
+        <div class="task__text" id="task-text"></div>
+        <button class="btn btn--primary" id="task-btn" style="align-self:flex-start">Новое задание</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СОБЕРИ МИР ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="banner reveal">
+      <div class="banner__inner">
+        <span class="eyebrow">Коллекция</span>
+        <h2>Собери мир Маруси</h2>
+        <p class="lead" style="color:#5C4A2E">Мир Маруси можно не только читать. Его можно собирать: герои, места, книги и маленькие вещи, из которых состоит её жизнь.</p>
+        <a class="btn btn--primary btn--lg" href="collection.html" style="margin-top:8px">Смотреть коллекцию</a>
+      </div>
+      <div class="collect">
+        <div class="collect__item">👧<span class="n">Маруся</span></div>
+        <div class="collect__item">🦔<span class="n">Коричка</span></div>
+        <div class="collect__item">🏠<span class="n">Дом</span></div>
+        <div class="collect__item">🏫<span class="n">Школа</span></div>
+        <div class="collect__item">🎒<span class="n">Рюкзак</span></div>
+        <div class="collect__item">📚<span class="n">Книги</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ПОДАРКИ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Родителям</span>
+        <h2>Подарок, который превращается в приключение</h2>
+      </div>
+      <a class="btn btn--ghost" href="gifts.html">Все подарки</a>
+    </div>
+    <div class="grid grid--4" id="home-gifts"></div>
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="eyebrow">Честно</span><h2>Что говорят читатели</h2></div>
+    </div>
+    <div class="reveal" id="home-reviews"></div>
+  </div>
+</section>
+
+<!-- ============ БЛОГ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="eyebrow">Марусин журнал</span><h2>Читать родителям</h2></div>
+      <a class="btn btn--ghost" href="blog.html">Все статьи</a>
+    </div>
+    <div class="grid grid--3" id="home-posts"></div>
+  </div>
+</section>
+
+<!-- ============ SEO-текст ============ -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="paper reveal" style="max-width:86ch">
+      <h2 style="font-size:1.45rem">Книги, дневники и развивающие задания для детей 6–9 лет</h2>
+      <p class="muted">«Мир Маруси» — это детский бренд, объединяющий книги для девочек 6, 7, 8 и 9 лет, дневники-анкеты, раскраски, workbook с развивающими заданиями, игры и подарочные наборы. В центре — героиня Маруся и её талисман Коричка.</p>
+      <p class="muted">Родителям мы помогаем выбрать книгу по возрасту: для 6–7 лет — короткие главы и крупный шрифт, для 8–9 лет — более объёмные истории, логические задания и творческие тетради. Детский дневник и дневник-анкета для девочки развивают письменную речь и умение говорить о чувствах, раскраска для девочки — моторику и внимание, а workbook для детей — логику и фантазию.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <a class="tag" href="books.html">Книги 6–7 лет</a><a class="tag" href="books.html">Книги 8–9 лет</a>
+        <a class="tag" href="diaries.html">Дневник для девочки</a><a class="tag" href="coloring.html">Раскраска для девочки</a>
+        <a class="tag" href="games.html">Развивающие задания</a><a class="tag" href="gifts.html">Подарки девочке 7 лет</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-slot"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

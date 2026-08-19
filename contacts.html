@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Контакты, доставка, оплата и возврат — Мир Маруси</title>
+<meta name="description" content="Контакты бренда «Мир Маруси»: доставка, оплата, возврат, часто задаваемые вопросы и политика конфиденциальности.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23F3DDDA'/><circle cx='26' cy='30' r='3' fill='%237A5842'/><circle cx='38' cy='30' r='3' fill='%237A5842'/><path d='M27 38q5 4 10 0' stroke='%237A5842' stroke-width='2.4' fill='none' stroke-linecap='round'/></svg>">
+<link rel="preload" href="assets/fonts/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/neucha.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="contacts.html">
+<div id="header-slot"></div>
+<div class="wrap"><nav class="crumbs"><a href="index.html">Главная</a> › Контакты</nav></div><section class="section section--tight"><div class="wrap page-head">
+<span class="eyebrow">Контакты</span><h1>Напишите нам</h1><p class="lead">Отвечаем на письма в течение рабочего дня. Если вопрос про заказ — укажите его номер.</p>
+</div></section><section class="section" style="padding-top:0"><div class="wrap">
+<div class="split">
+ <div class="paper reveal">
+  <div class="field"><label>Имя</label><input placeholder="Как к вам обращаться"></div>
+  <div class="field"><label>E-mail</label><input type="email" placeholder="mail@example.com"></div>
+  <div class="field"><label>Сообщение</label><textarea rows="5" placeholder="Ваш вопрос"></textarea></div>
+  <button class="btn btn--primary" onclick="MMapp.toast('Форма демонстрационная — письмо не отправлено','✉️')">Отправить</button>
+  <p class="muted" style="font-size:.8rem;margin-top:.8rem">Демо-прототип: форма не подключена к почте.</p>
+ </div>
+ <div>
+  <div class="paper reveal" id="delivery" style="margin-bottom:14px"><h3>Доставка</h3><p class="muted">Доставка по России. Сроки и стоимость рассчитываются при оформлении заказа в зависимости от адреса и способа доставки. При заказе от 2500 ₽ доставка бесплатная.</p></div>
+  <div class="paper reveal" id="payment" style="margin-bottom:14px"><h3>Оплата</h3><p class="muted">Банковской картой и через популярные платёжные сервисы. В демонстрационном прототипе платёжный шлюз не подключён.</p></div>
+  <div class="paper reveal" id="returns" style="margin-bottom:14px"><h3>Возврат</h3><p class="muted">Вернуть товар можно в течение срока, установленного законодательством о дистанционной торговле вашей страны (в ЕС — 14 дней), если он не был в использовании.</p></div>
+  <div class="paper reveal" id="privacy"><h3>Политика конфиденциальности</h3><p class="muted">Мы собираем минимум данных: контакты для доставки и, по желанию, возраст ребёнка — чтобы рекомендовать книги. Детям не показывается реклама, данные не передаются третьим лицам для маркетинга.</p></div>
+ </div>
+</div>
+
+<section class="section" id="faq-sec">
+ <div class="section-head"><div><span class="eyebrow">FAQ</span><h2>Частые вопросы</h2></div></div>
+ <div id="faq"></div>
+</section>
+</div></section><div id="footer-slot"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

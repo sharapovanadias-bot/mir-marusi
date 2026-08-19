@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workbook и развивающие задания для детей 6–9 лет | Мир Маруси</title>
+<meta name="description" content="Workbook для детей 6–9 лет: лабиринты, ребусы, загадки, логические задачи, поиск отличий, задания на внимание и создание собственных историй. Игры мира Маруси.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23F3DDDA'/><circle cx='26' cy='30' r='3' fill='%237A5842'/><circle cx='38' cy='30' r='3' fill='%237A5842'/><path d='M27 38q5 4 10 0' stroke='%237A5842' stroke-width='2.4' fill='none' stroke-linecap='round'/></svg>">
+<link rel="preload" href="assets/fonts/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/neucha.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="games.html">
+<div id="header-slot"></div>
+<div class="wrap"><nav class="crumbs"><a href="index.html">Главная</a> › Игры и workbook</nav></div><section class="section section--tight"><div class="wrap page-head">
+<span class="eyebrow">Игры и workbook</span><h1>Не просто читать. Приключаться.</h1><p class="lead">Лабиринты, ребусы, загадки, логические задачи, поиск отличий и творческие развороты, где ребёнок сам становится автором.</p>
+</div></section><section class="section" style="padding-top:0"><div class="wrap">
+<div class="grid grid--4">
+ <div class="paper center reveal"><div style="font-size:1.9rem">🌀</div><b>Лабиринты</b><p class="muted" style="font-size:.88rem;margin:0">12 маршрутов разной сложности</p></div>
+ <div class="paper center reveal"><div style="font-size:1.9rem">🔤</div><b>Ребусы и шифры</b><p class="muted" style="font-size:.88rem;margin:0">Слова, спрятанные в картинках</p></div>
+ <div class="paper center reveal"><div style="font-size:1.9rem">🔍</div><b>Поиск отличий</b><p class="muted" style="font-size:.88rem;margin:0">Тренировка внимания</p></div>
+ <div class="paper center reveal"><div style="font-size:1.9rem">🧠</div><b>Логика</b><p class="muted" style="font-size:.88rem;margin:0">Задачи с одним верным ответом</p></div>
+ <div class="paper center reveal"><div style="font-size:1.9rem">❓</div><b>Загадки</b><p class="muted" style="font-size:.88rem;margin:0">С подсказками на обороте</p></div>
+ <div class="paper center reveal"><div style="font-size:1.9rem">✏️</div><b>Рисование</b><p class="muted" style="font-size:.88rem;margin:0">«Дорисуй» и пустые комиксы</p></div>
+ <div class="paper center reveal"><div style="font-size:1.9rem">📖</div><b>Свои истории</b><p class="muted" style="font-size:.88rem;margin:0">30 начал для собственной книги</p></div>
+ <div class="paper center reveal"><div style="font-size:1.9rem">🎴</div><b>Карточная игра</b><p class="muted" style="font-size:.88rem;margin:0">Для 2–4 игроков</p></div>
+</div>
+
+<div class="duo-blocks" style="margin-top:34px">
+ <div class="letter reveal"><span class="tape tape--l"></span>
+  <span class="eyebrow">Маруся задаёт тебе задание</span>
+  <div class="letter__text"><span>«Представь, что сегодня школа превратилась в космический корабль. Что произошло дальше?»</span></div>
+  <div class="letter__sign">— Маруся</div>
+ </div>
+ <div class="task reveal">
+  <span class="eyebrow">Задание Маруси на сегодня</span>
+  <div class="task__text" id="task-text"></div>
+  <button class="btn btn--primary" id="task-btn" style="align-self:flex-start">Новое задание</button>
+ </div>
+</div>
+</div></section><section class="section" style="padding-top:0"><div class="wrap">
+<div class="filters"><button class="chip" data-filter="age:6-7">6–7 лет</button><button class="chip" data-filter="age:8-9">8–9 лет</button><button class="chip" data-filter="tag:Подарок">Подарок</button></div>
+<p class="muted" style="font-size:.86rem;margin-bottom:18px" id="catalog-count"></p>
+<div class="grid grid--auto" id="catalog" data-type="games"></div>
+</div></section><div id="footer-slot"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
