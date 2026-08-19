@@ -485,7 +485,7 @@ function initProduct(){
           : `<span class="price" style="font-size:2rem">${money(p.price)}</span>${p.oldPrice?`<span class="muted" style="text-decoration:line-through">${money(p.oldPrice)}</span>`:''}`}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin:16px 0">
-        <button class="btn ${soon?'btn--soft':'btn--primary'} btn--lg" data-add="${p.id}" style="flex:1;min-width:180px">${soon?'Сообщить о выходе':'Купить'}</button>
+        <button class="btn ${soon?'btn--soft':'btn--primary'} btn--lg" data-add="${p.id}" style="flex:1;min-width:180px">${soon?'Сообщить о выходе':(p.digital?'Купить и скачать':'Купить')}</button>
         <button class="btn btn--ghost btn--lg ${favs.includes(p.id)?'is-on':''}" data-fav="${p.id}">♡ Добавить в желания</button>
       </div>
       ${p.fragment?`<a class="btn btn--soft" href="${p.fragment}" target="_blank" rel="noopener" style="margin:-6px 0 16px">Посмотреть фрагмент — бесплатно, PDF</a>`:''}
@@ -500,9 +500,13 @@ function initProduct(){
         <div><div class="hand">Маруся подсказывает</div><p>${esc(p.cross.text)}</p></div>
         <span style="margin-left:auto">›</span></a>`:''}
       <div class="strip" style="justify-content:flex-start;margin-top:18px">
-        <span class="strip__item">🚚 <b>Доставка</b> по России</span>
-        <span class="strip__item">↩️ <b>Возврат</b> 14 дней</span>
-        <span class="strip__item">🎁 <b>Упаковка</b> в подарок</span>
+        ${p.digital
+          ? `<span class="strip__item">⬇️ <b>Скачивание</b> сразу после оплаты</span>
+             <span class="strip__item">🖨 <b>Печать</b> без ограничений</span>
+             <span class="strip__item">📄 <b>PDF</b>${p.fileSize?' · '+p.fileSize:''}</span>`
+          : `<span class="strip__item">🚚 <b>Доставка</b> по России</span>
+             <span class="strip__item">↩️ <b>Возврат</b> 14 дней</span>
+             <span class="strip__item">🎁 <b>Упаковка</b> в подарок</span>`}
       </div>
     </div>
   </div>
@@ -641,6 +645,9 @@ function renderCartPage(){
     bindGiftBuilder(root); return;
   }
   const total=cartTotal();
+  const physTotal=Object.keys(cart).reduce((s,id)=>{const p=byId(id);return p&&!p.digital?s+(p.price||0)*cart[id]:s;},0);
+  const needShip=physTotal>0;
+  const ship=(!needShip||total>=FREE_SHIP)?0:SHIP_COST;
   const extras = MM.products.filter(p=>p.status==='live' && !cart[p.id]).slice(0,3);
   root.innerHTML=`
   <div class="cart-layout">
@@ -671,13 +678,14 @@ function renderCartPage(){
     <aside class="paper" style="position:sticky;top:100px">
       <h3>Ваш заказ</h3>
       <div style="display:flex;justify-content:space-between;margin:.4rem 0"><span class="muted">Товары</span><span style="font-family:var(--num)">${money(total)}</span></div>
-      <div style="display:flex;justify-content:space-between;margin:.4rem 0"><span class="muted">Доставка</span><span style="font-family:var(--num)">${total>=FREE_SHIP?'бесплатно':money(SHIP_COST)}</span></div>
+      <div style="display:flex;justify-content:space-between;margin:.4rem 0"><span class="muted">${needShip?'Доставка':'Получение'}</span><span style="font-family:var(--num)">${!needShip?'ссылка на скачивание':(total>=FREE_SHIP?'бесплатно':money(SHIP_COST))}</span></div>
       <hr style="border:none;border-top:1px dashed var(--line);margin:14px 0">
-      <div style="display:flex;justify-content:space-between;align-items:baseline"><b>Итого</b><span class="price" style="font-size:1.5rem">${money(total+(total>=FREE_SHIP?0:SHIP_COST))}</span></div>
-      ${total<FREE_SHIP?`<p class="muted" style="font-size:.82rem;margin-top:.6rem">До бесплатной доставки — ${money(FREE_SHIP-total)}</p>`:''}
-      <label style="display:flex;gap:.6rem;align-items:flex-start;margin:16px 0;font-size:.88rem">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><b>Итого</b><span class="price" style="font-size:1.5rem">${money(total+ship)}</span></div>
+      ${needShip&&total<FREE_SHIP?`<p class="muted" style="font-size:.82rem;margin-top:.6rem">До бесплатной доставки — ${money(FREE_SHIP-total)}</p>`:''}
+      ${!needShip?`<p class="muted" style="font-size:.82rem;margin-top:.6rem">В заказе только цифровые товары — файлы появятся в личном кабинете сразу после оплаты.</p>`:''}
+      ${needShip?`<label style="display:flex;gap:.6rem;align-items:flex-start;margin:16px 0;font-size:.88rem">
         <input type="checkbox" style="margin-top:.25rem"> Упаковать как подарок и вложить открытку от Маруси
-      </label>
+      </label>`:'<div style="height:16px"></div>'}
       <button class="btn btn--primary btn--block btn--lg" id="checkout">Перейти к оплате</button>
       <p class="muted" style="font-size:.78rem;text-align:center;margin:.8rem 0 0">Демо-прототип: платёжный шлюз не подключён.</p>
     </aside>
@@ -700,13 +708,16 @@ function initAccount(){
     favs:`<h3>Избранное</h3><div class="grid grid--3" id="acc-favs"></div>`,
     books:`<h3>Мои книги</h3><div class="empty"><span class="empty__emoji">📚</span>Здесь будут все купленные книги — с закладкой на главе, где вы остановились.</div>`,
     digital:`<h3>Мои цифровые материалы</h3>
-      <p class="muted">Раскраски и задания в PDF становятся доступны сразу после покупки.</p>
+      <p class="muted">PDF-файлы становятся доступны сразу после оплаты — скачивать можно сколько угодно раз.</p>
       <div class="grid grid--2">
-        <div class="paper"><span class="tag tag--sage">PDF</span><h4 style="margin:.5rem 0 .2rem">Раскраска «Коричка»: 4 страницы</h4>
-        <p class="muted" style="font-size:.88rem">Бесплатный пробник — доступен всем.</p>
-        <button class="btn btn--soft btn--sm" onclick="alert('В прототипе файл не подключён')">Скачать</button></div>
-        <div class="paper" style="opacity:.6"><span class="tag">После покупки</span><h4 style="margin:.5rem 0 .2rem">Задания «Маруся-детектив»</h4>
-        <p class="muted" style="font-size:.88rem">Откроется после покупки workbook.</p></div>
+        <div class="paper"><span class="tag tag--sage">PDF · бесплатно</span>
+        <h4 style="margin:.5rem 0 .2rem">«Маруся и друзья»: фрагмент</h4>
+        <p class="muted" style="font-size:.88rem">Обложка и две страницы раскраски — доступно всем, без покупки.</p>
+        <a class="btn btn--soft btn--sm" href="assets/coloring-fragment.pdf" target="_blank" rel="noopener">Скачать фрагмент</a></div>
+        <div class="paper" style="opacity:.6"><span class="tag">После покупки</span>
+        <h4 style="margin:.5rem 0 .2rem">«Маруся и друзья»: все 24 страницы</h4>
+        <p class="muted" style="font-size:.88rem">Полный файл откроется здесь после оплаты раскраски.</p>
+        <a class="btn btn--ghost btn--sm" href="product.html?id=col-friends">Посмотреть раскраску</a></div>
       </div>`,
     gifts:`<h3>Подарки</h3><div class="empty"><span class="empty__emoji">🎁</span>Здесь появятся подарочные сертификаты и наборы, которые вы отправили.</div>`,
     settings:`<h3>Настройки</h3>
