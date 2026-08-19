@@ -45,13 +45,13 @@ MM.products = [
     gallery:['assets/img/story/cover.jpg','assets/img/story/ryukzak.jpg','assets/img/story/03_korichka.jpg','assets/img/story/01_dnevnik.jpg','assets/img/story/10okt_biblioteka.jpg','assets/img/story/final_zima.jpg']
   },
   {
-    id:'book-two', type:'books', status:'soon',
+    id:'book-two', type:'books', status:'live',
     title:'Зима Маруси',
     subtitle:'Серия «Дневник Маруси». Книга вторая',
     desc:'Зима пришла — а вместе с ней вторая тетрадка Маруси. Новогодний праздник в классе, спектакль, снежная крепость, зимние каникулы и новенькая Лиза. И, конечно, ёжик Коричка, кошка Ася и брат-учёный Егор.',
-    price:null, age:'6–9', ages:['6-7','8-9'], pages:160, format:'печатное издание, 148×210 мм',
+    price:890, age:'6–9', ages:['6-7','8-9'], pages:160, format:'печатное издание, 148×210 мм',
     author:'Надежда Шарапова', cover:'assets/img/winter/cover-winter.jpg', accent:'blue',
-    tags:['Истории'], gift:false,
+    tags:['Истории','Подарок'], gift:true, giftMax:1000,
     inside:[
       'Дневник Маруси с 1 декабря по 15 февраля',
       'Четыре части: Новый год, зимние приключения, каникулы, возвращение в школу',
