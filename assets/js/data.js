@@ -104,18 +104,33 @@ MM.products = [
 
   /* ===== РАСКРАСКИ ===== */
   {
-    id:'col-world', type:'coloring', status:'soon',
-    title:'Раскрась мир Маруси',
-    subtitle:'Раскраска по книге',
-    desc:'Развороты из книги, готовые к цвету. Собираем макет.',
-    price:null, age:'6–9', ages:['6-7','8-9'], pages:null, format:'в разработке',
-    author:'Мир Маруси', cover:'assets/img/story/n07_kartochka.jpg', accent:'sage',
-    tags:[], gift:false,
-    inside:['Готовится к выходу'],
-    helps:['мелкую моторику','чувство цвета'],
+    id:'col-friends', type:'coloring', status:'live',
+    title:'Маруся и друзья',
+    subtitle:'Раскраска с заданиями',
+    desc:'Двадцать четыре страницы, где главная художница — ты. Маруся, Коричка, Ася, Вова, Егор и Лиза ждут своих цветов, а рядом с каждым рисунком — загадка, ребус и маленькая игра.',
+    price:490, /* TODO: подтвердить цену у автора */ age:'6–9', ages:['6-7','8-9'], pages:24, format:'печатное издание, А4 (210×297 мм)',
+    author:'Надежда Шарапова', cover:'assets/img/coloring/cover-coloring.jpg', accent:'sage',
+    tags:['Творчество','Подарок'], gift:true, giftMax:1000,
+    inside:[
+      'Герои из книг: Маруся, Коричка, Ася, Вова, Егор, Лиза и Соня',
+      'Зимние сюжеты: снежная крепость, санки, ёлка, Генерал Снег',
+      'Загадка, ребус и игра на каждой странице',
+      'Головоломки: снежный шифр, кроссворд, находилка, «найди отличия»',
+      'Страница «Кому что принадлежит» — про героев и их предметы',
+      'Крупные контуры и плотные линии — удобно раскрашивать карандашами'
+    ],
+    helps:['мелкую моторику','чувство цвета','внимание и логику','словарный запас'],
     excerpt:null,
-    cross:{ text:'Сначала — история.', to:'book-ezhik', emoji:'📖' },
-    gallery:['assets/img/story/n07_kartochka.jpg','assets/img/story/08_bukvy_final.jpg']
+    fragment:'assets/coloring-fragment.pdf',
+    cross:{ text:'Герои раскраски живут в книге.', to:'book-ezhik', emoji:'📖' },
+    gallery:[
+      'assets/img/coloring/cover-coloring.jpg',
+      'assets/img/coloring/p-marusya.jpg',
+      'assets/img/coloring/p-korichka.jpg',
+      'assets/img/coloring/p-asya.jpg',
+      'assets/img/coloring/p-krepost.jpg',
+      'assets/img/coloring/p-pary.jpg'
+    ]
   },
   {
     id:'col-ezhik', type:'coloring', status:'soon',

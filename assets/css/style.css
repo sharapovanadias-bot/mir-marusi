@@ -790,3 +790,44 @@ p{margin:0 0 1em}
   .bookspread{grid-template-columns:1fr}
   .bookspread__covers{order:-1}
 }
+
+/* ── Раскраска: секция на главной ───────────────────────── */
+.section--paper{background:var(--paper)}
+.split--flip .colorfan{order:-1}
+@media (max-width:900px){ .split--flip .colorfan{order:0} }
+
+.colorfan{
+  position:relative;display:grid;place-items:center;
+  min-height:min(58vw,420px);padding:14px;
+}
+.colorfan img{
+  border-radius:10px;background:#fff;
+  box-shadow:0 14px 34px rgba(90,62,44,.16), 0 2px 6px rgba(90,62,44,.08);
+}
+.colorfan__c{
+  position:relative;z-index:3;width:min(58%,250px);
+  transform:rotate(-2.5deg);transition:transform .5s cubic-bezier(.3,1,.4,1);
+}
+.colorfan__p{
+  position:absolute;z-index:1;width:min(44%,190px);top:12%;
+  filter:saturate(.05) brightness(1.03);
+  transition:transform .5s cubic-bezier(.3,1,.4,1);
+}
+.colorfan__p--l{left:2%;transform:rotate(-11deg)}
+.colorfan__p--r{right:2%;transform:rotate(9deg);top:16%}
+.colorfan:hover .colorfan__p--l{transform:rotate(-15deg) translate(-6px,-8px)}
+.colorfan:hover .colorfan__p--r{transform:rotate(13deg) translate(6px,-8px)}
+.colorfan:hover .colorfan__c{transform:rotate(-1deg) translateY(-4px)}
+.colorfan__pencil{
+  position:absolute;z-index:4;right:8%;bottom:6%;font-size:2rem;
+  transform:rotate(-14deg);animation:pencil-draw 4.5s ease-in-out infinite;
+}
+@keyframes pencil-draw{
+  0%,100%{transform:rotate(-14deg) translate(0,0)}
+  50%{transform:rotate(-8deg) translate(-8px,-5px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .colorfan__pencil{animation:none}
+  .colorfan:hover .colorfan__p--l,.colorfan:hover .colorfan__p--r,.colorfan:hover .colorfan__c{transform:none}
+  .colorfan__p--l{transform:rotate(-11deg)}.colorfan__p--r{transform:rotate(9deg)}.colorfan__c{transform:rotate(-2.5deg)}
+}

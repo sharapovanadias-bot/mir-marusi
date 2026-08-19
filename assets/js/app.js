@@ -488,6 +488,7 @@ function initProduct(){
         <button class="btn ${soon?'btn--soft':'btn--primary'} btn--lg" data-add="${p.id}" style="flex:1;min-width:180px">${soon?'Сообщить о выходе':'Купить'}</button>
         <button class="btn btn--ghost btn--lg ${favs.includes(p.id)?'is-on':''}" data-fav="${p.id}">♡ Добавить в желания</button>
       </div>
+      ${p.fragment?`<a class="btn btn--soft" href="${p.fragment}" target="_blank" rel="noopener" style="margin:-6px 0 16px">Посмотреть фрагмент — бесплатно, PDF</a>`:''}
       <ul class="specs">
         <li><b>Возраст</b>${p.age} лет</li>
         ${p.pages?`<li><b>Страниц</b>${p.pages}</li>`:''}
