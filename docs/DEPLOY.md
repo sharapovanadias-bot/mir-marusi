@@ -14,6 +14,8 @@ Git-репозиторий готов, конфиги кэширования н�
 - 110 файлов, крупнейший — 228 КБ
   (лимиты Cloudflare: 20 000 файлов, 25 МБ на файл — запас огромный)
 - `_headers` — кэширование и заголовки безопасности для Cloudflare
+- `robots.txt` и `sitemap.xml` (12 страниц; корзина, кабинет и шаблон товара исключены)
+- Служебные заметки убраны в `docs/` и закрыты от индексации
 - `.gitignore`, `.nojekyll`
 - Все пути в коде относительные — сайт заработает на любом домене без правок
 
@@ -112,15 +114,18 @@ need a build step, leave the Build command field blank».
 
 ## Сразу после подключения домена — заменить заглушку
 
-В `index.html` в двух местах (`<link rel="canonical">` и JSON-LD бренда) стоит
-`https://mirmarusi.example/`. Пока она там, поисковики считают канонической
-несуществующую страницу.
+Заглушка `https://mirmarusi.example` встречается в трёх файлах:
+`index.html` (`<link rel="canonical">` и JSON-LD бренда), `robots.txt` и `sitemap.xml`.
+Пока она там, поисковики считают канонической несуществующую страницу.
 
 ```bash
 cd /home/user/mir-marusi
-sed -i 's|https://mirmarusi.example|https://ВАШ-ДОМЕН|g' index.html
+sed -i 's|https://mirmarusi.example|https://ВАШ-ДОМЕН|g' index.html robots.txt sitemap.xml
 git commit -am "Настоящий домен" && git push
 ```
+
+После этого добавьте карту сайта в Яндекс.Вебмастер и Google Search Console:
+`https://ВАШ-ДОМЕН/sitemap.xml`
 
 Остальные 14 страниц пока без `canonical` — на работу сайта не влияет,
 но перед индексацией и рекламой стоит проставить.
