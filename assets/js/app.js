@@ -364,11 +364,7 @@ function initHero(){
   const stage=$('#hero-stage'); if(!stage) return;
   stage.innerHTML = MM.destinations.map((d,i)=>
     `<div class="hero__scene ${i===0?'is-on':''}" data-scene="${d.id}"><img src="${d.img}" alt="Маруся: ${d.label}" ${i?'loading="lazy"':''}></div>`
-  ).join('') + `<div class="hero__stage-cap" id="hero-cap">${MM.destinations[0].caption}</div>
-  <a class="hero__book" href="product.html?id=book-ezhik" aria-label="Книга «Маруся и ёжик в рюкзаке»">
-    <img src="assets/img/story/cover.jpg" alt="Обложка книги «Маруся и ёжик в рюкзаке»">
-    <span class="hero__book-cap">Первая книга<b>уже вышла</b></span>
-  </a>`;
+  ).join('') + `<div class="hero__stage-cap" id="hero-cap">${MM.destinations[0].caption}</div>`;
 
   const list=$('#dest-list');
   list.innerHTML = MM.destinations.map((d,i)=>
