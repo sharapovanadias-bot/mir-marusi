@@ -811,3 +811,76 @@ p{margin:0 0 1em}
   .colorfan:hover .colorfan__p--l,.colorfan:hover .colorfan__p--r,.colorfan:hover .colorfan__c{transform:none}
   .colorfan__p--l{transform:rotate(-11deg)}.colorfan__p--r{transform:rotate(9deg)}.colorfan__c{transform:rotate(-2.5deg)}
 }
+
+/* ============================================================
+   ГОД С МАРУСЕЙ — четыре сезона
+   ============================================================ */
+.year{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.season{
+  position:relative;display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:340px;padding:22px;border-radius:var(--r-l);overflow:hidden;
+  border:1px solid var(--line);background:var(--milk);box-shadow:var(--shadow-s);
+  text-decoration:none;color:var(--ink);isolation:isolate;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s
+}
+.season__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.season::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(59,52,44,0) 32%,rgba(59,52,44,.5) 68%,rgba(59,52,44,.82) 100%)
+}
+a.season:hover{transform:translateY(-6px);box-shadow:var(--shadow-l)}
+a.season:hover .season__img{transform:scale(1.05)}
+.season__img{transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.season__emoji{
+  position:absolute;top:16px;left:18px;font-size:1.6rem;line-height:1;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))
+}
+.season__now{
+  position:absolute;top:18px;right:16px;z-index:1;
+  font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--mustard-deep);color:#3B2A0E;padding:5px 10px;border-radius:999px;
+  box-shadow:0 4px 12px rgba(217,169,60,.4)
+}
+.season h3{font-family:var(--hand);font-size:2.1rem;margin:0 0 2px;color:#fff;line-height:1}
+.season__tag{font-family:var(--sans);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.82);margin:0 0 8px}
+.season__lead{font-size:.92rem;color:rgba(255,255,255,.9);margin:0;line-height:1.45}
+.season__go{margin-top:14px;font-family:var(--sans);font-size:.84rem;font-weight:600;color:#fff;display:flex;align-items:center;gap:7px}
+.season--locked{cursor:default}
+.season--locked .season__img{filter:grayscale(.55) brightness(.86)}
+.season--locked .season__go{color:rgba(255,255,255,.72)}
+.season__lock{
+  position:absolute;top:18px;right:16px;z-index:1;
+  font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.06em;
+  background:rgba(255,253,249,.9);color:var(--ink-soft);padding:5px 10px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.6)
+}
+@media (max-width:900px){.year{grid-template-columns:repeat(2,1fr)}.season{min-height:280px}}
+@media (max-width:560px){.year{grid-template-columns:1fr}.season{min-height:240px}}
+
+/* ---- страница сезона ---- */
+.seasonhero{position:relative;border-radius:var(--r-xl);overflow:hidden;margin-bottom:8px;border:1px solid var(--line)}
+.seasonhero img{width:100%;height:clamp(240px,38vw,420px);object-fit:cover;display:block}
+.seasonhero__cap{
+  position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,4vw,40px);
+  background:linear-gradient(180deg,rgba(59,52,44,0),rgba(59,52,44,.78))
+}
+.seasonhero__cap h1{color:#fff;margin:0 0 6px}
+.seasonhero__cap .lead{color:rgba(255,255,255,.92);max-width:56ch;margin:0}
+.timeline{list-style:none;padding:0;margin:0;position:relative}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.timeline li{position:relative;padding:0 0 18px 32px}
+.timeline li::before{
+  content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;
+  background:var(--milk);border:2px solid var(--brown-light)
+}
+.timeline b{display:block;font-family:var(--sans);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brown-soft);margin-bottom:2px}
+.timeline span{font-family:var(--serif);font-size:1.04rem;color:var(--ink)}
+.seasongal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.seasongal figure{margin:0;border-radius:var(--r-m);overflow:hidden;background:var(--milk);border:1px solid var(--line);box-shadow:var(--shadow-s)}
+.seasongal img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.seasongal figcaption{padding:10px 12px;font-size:.84rem;color:var(--ink-soft);line-height:1.4}
+@media (max-width:900px){.seasongal{grid-template-columns:repeat(2,1fr)}}
+.seasonnav{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+/* текущий сезон не приглушаем, даже если он ещё не написан */
+.season--now .season__img{filter:none}
+.season--now{box-shadow:var(--shadow-m)}

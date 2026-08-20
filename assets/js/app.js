@@ -60,7 +60,8 @@ const NAV = [
   ['Книги','books.html'],['Дневники','diaries.html'],['Раскраски','coloring.html'],
   ['Игры','games.html'],['Мир Маруси','world.html'],['Коллекция','collection.html']
 ];
-const NAV_MOBILE = NAV.concat([['Подарки','gifts.html'],['Персонажи','characters.html'],['О Марусе','about.html'],['Марусин журнал','blog.html'],['Контакты','contacts.html'],['Личный кабинет','account.html']]);
+/* «Год с Марусей» живёт на главной (#year) — в основное меню не выносим, чтобы не растить его до 7 пунктов */
+const NAV_MOBILE = NAV.concat([['Год с Марусей','index.html#year'],['Подарки','gifts.html'],['Персонажи','characters.html'],['О Марусе','about.html'],['Марусин журнал','blog.html'],['Контакты','contacts.html'],['Личный кабинет','account.html']]);
 
 function logoSVG(size=44){
   return `<svg class="logo__mark" viewBox="0 0 64 64" width="${size}" height="${size}" aria-hidden="true">
@@ -856,6 +857,134 @@ function initWorld(){
   observeReveal(g);
 }
 
+/* ============================================================
+   ГОД С МАРУСЕЙ — сезоны
+   ============================================================ */
+function currentSeason(){
+  const m=new Date().getMonth();
+  return (MM.seasons.find(s=>s.months.includes(m))||MM.seasons[0]).id;
+}
+
+function initSeasons(){
+  const g=$('#year-grid'); if(!g) return;
+  const now=currentSeason();
+  g.innerHTML = MM.seasons.map(s=>{
+    const open = s.status==='open';
+    const badge = s.id===now
+      ? `<span class="season__now">сейчас</span>`
+      : (open?'':`<span class="season__lock">скоро</span>`);
+    const inner=`
+      <img class="season__img" src="${s.cover}" alt="" loading="lazy">
+      <span class="season__emoji">${s.emoji}</span>
+      ${badge}
+      <p class="season__tag">${esc(s.tagline)}</p>
+      <h3>${esc(s.title)}</h3>
+      <p class="season__lead">${esc(s.lead)}</p>
+      <div class="season__go">${open?'Войти в сезон':'Маруся ещё пишет'}</div>`;
+    const nowCls = s.id===now ? ' season--now' : '';
+    return open
+      ? `<a class="season reveal${nowCls}" href="season.html?s=${s.id}">${inner}</a>`
+      : `<div class="season season--locked reveal${nowCls}" aria-disabled="true">${inner}</div>`;
+  }).join('');
+  observeReveal(g);
+}
+
+function initSeasonPage(){
+  const root=$('#season'); if(!root) return;
+  const id=new URLSearchParams(location.search).get('s');
+  const s=MM.seasons.find(x=>x.id===id && x.status==='open');
+  if(!s){ location.replace('index.html#year'); return; }
+
+  const book=MM.products.find(p=>p.id===s.book);
+  const idx=MM.seasons.findIndex(x=>x.id===s.id);
+  const opens=MM.seasons.filter(x=>x.status==='open');
+  const other=opens.find(x=>x.id!==s.id);
+
+  document.title=`${s.title} с Марусей — истории, иллюстрации и книга | Мир Маруси`;
+  const md=document.querySelector('meta[name="description"]');
+  if(md) md.setAttribute('content',`${s.title} в мире Маруси: ${s.lead}`);
+  const can=document.querySelector('link[rel="canonical"]');
+  if(can) can.setAttribute('href',`https://mir-marusi.ai-business-lab.workers.dev/season?s=${s.id}`);
+  const ogu=document.querySelector('meta[property="og:url"]');
+  if(ogu) ogu.setAttribute('content',`https://mir-marusi.ai-business-lab.workers.dev/season?s=${s.id}`);
+  const ogi=document.querySelector('meta[property="og:image"]');
+  if(ogi) ogi.setAttribute('content','https://mir-marusi.ai-business-lab.workers.dev/'+s.cover);
+  const ogt=document.querySelector('meta[property="og:title"]');
+  if(ogt) ogt.setAttribute('content',`${s.title} с Марусей | Мир Маруси`);
+
+  root.innerHTML=`
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="seasonhero reveal">
+        <img src="${s.cover}" alt="${esc(s.title)} в мире Маруси">
+        <div class="seasonhero__cap">
+          <span class="eyebrow" style="color:#fff">${s.emoji} ${esc(s.tagline)}</span>
+          <h1>${esc(s.title)} с Марусей</h1>
+          <p class="lead">${esc(s.lead)}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="grid grid--2" style="gap:40px;align-items:start">
+        <div class="reveal">
+          <span class="eyebrow">Что случилось</span>
+          <h2 style="margin-bottom:22px">Дни, которые попали в тетрадку</h2>
+          <ul class="timeline">
+            ${s.chapters.map(([d,t])=>`<li><b>${esc(d)}</b><span>${esc(t)}</span></li>`).join('')}
+          </ul>
+        </div>
+        ${book?`
+        <aside class="paper reveal" style="padding:28px;position:sticky;top:calc(var(--header-h) + 20px)">
+          <span class="eyebrow">Книга сезона</span>
+          <img src="${book.cover}" alt="${esc(book.title)}" style="width:100%;border-radius:var(--r-m);margin:12px 0 16px;box-shadow:var(--shadow-m)" loading="lazy">
+          <h3 style="margin:0 0 6px">${esc(book.title)}</h3>
+          <p class="muted" style="font-size:.92rem">${esc(book.desc)}</p>
+          <p class="price" style="margin:14px 0 16px">${money(book.price)}</p>
+          <a class="btn btn--primary btn--block" href="product.html?id=${book.id}">Подробнее о книге</a>
+        </aside>`:''}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Иллюстрации</span>
+          <h2>${esc(s.title)} в картинках</h2>
+        </div>
+      </div>
+      <div class="seasongal reveal">
+        ${s.gallery.map(([src,cap])=>`
+          <figure><img src="${src}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  ${s.task?`
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="paper reveal" style="padding:clamp(24px,4vw,40px);text-align:center;max-width:720px;margin:0 auto">
+        <span class="eyebrow" style="justify-content:center">Задание сезона</span>
+        <p style="font-family:var(--hand);font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.35;margin:.4rem 0 0">${esc(s.task)}</p>
+      </div>
+    </div>
+  </section>`:''}
+
+  <section class="section section--tight">
+    <div class="wrap seasonnav">
+      <a class="btn btn--ghost" href="index.html#year">← Все сезоны</a>
+      ${other?`<a class="btn btn--soft" href="season.html?s=${other.id}">${other.emoji} ${esc(other.title)} →</a>`:''}
+    </div>
+  </section>`;
+
+  observeReveal(root);
+  bindActions(root);
+}
+
 function initFaq(){
   const g=$('#faq'); if(!g) return;
   g.innerHTML = MM.faq.map(([q,a])=>`
@@ -884,7 +1013,7 @@ function buildFooter(){
         <li><a href="coloring.html">Раскраски</a></li><li><a href="games.html">Игры и workbook</a></li>
         <li><a href="collection.html">Коллекция</a></li><li><a href="gifts.html">Подарки</a></li></ul></div>
       <div><h4>Мир</h4><ul>
-        <li><a href="world.html">Мир Маруси</a></li><li><a href="characters.html">Персонажи</a></li>
+        <li><a href="world.html">Мир Маруси</a></li><li><a href="index.html#year">Год с Марусей</a></li><li><a href="characters.html">Персонажи</a></li>
         <li><a href="about.html">О Марусе</a></li><li><a href="blog.html">Марусин журнал</a></li>
         <li><a href="contacts.html">Контакты</a></li></ul></div>
       <div><h4>Родителям</h4><ul>
@@ -909,6 +1038,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   syncBadges(); renderCartDrawer(); renderFavsDrawer();
   initHero(); initHome(); initCatalog(); initProduct(); initLetter(); initTask();
   initCharacters(); initBlog(); initWorld(); initFaq(); initAccount(); renderCartPage();
+  initSeasons(); initSeasonPage();
   bindActions(document); observeReveal(document);
 });
 
