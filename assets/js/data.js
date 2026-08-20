@@ -96,6 +96,8 @@ MM.products = [
     ],
     helps:['письменную речь','умение говорить о чувствах','фантазию','логику и внимание','уверенность в себе'],
     excerpt:null,
+    fragment:'assets/diary-fragment.pdf',
+    fragmentNote:'5 страниц из 100',
     cross:{ text:'Дневник начинается там, где заканчивается книга.', to:'book-two', emoji:'📖' },
     gallery:[
       'assets/img/diary/cover-diary.jpg',

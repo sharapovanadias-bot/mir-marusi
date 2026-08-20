@@ -703,18 +703,22 @@ function initAccount(){
     orders:`<h3>Мои заказы</h3><div class="empty"><span class="empty__emoji">📦</span>Заказов пока нет. После первой покупки они появятся здесь — с трек-номером и статусом.</div>`,
     favs:`<h3>Избранное</h3><div class="grid grid--3" id="acc-favs"></div>`,
     books:`<h3>Мои книги</h3><div class="empty"><span class="empty__emoji">📚</span>Здесь будут все купленные книги — с закладкой на главе, где вы остановились.</div>`,
-    digital:`<h3>Мои цифровые материалы</h3>
-      <p class="muted">PDF-файлы становятся доступны сразу после оплаты — скачивать можно сколько угодно раз.</p>
-      <div class="grid grid--2">
+    digital:(()=>{
+      const dig=MM.products.filter(p=>p.digital && p.status==='live');
+      const free=dig.filter(p=>p.fragment).map(p=>`
         <div class="paper"><span class="tag tag--sage">PDF · бесплатно</span>
-        <h4 style="margin:.5rem 0 .2rem">«Маруся и друзья»: фрагмент</h4>
-        <p class="muted" style="font-size:.88rem">Обложка и две страницы раскраски — доступно всем, без покупки.</p>
-        <a class="btn btn--soft btn--sm" href="assets/coloring-fragment.pdf" target="_blank" rel="noopener">Скачать фрагмент</a></div>
+        <h4 style="margin:.5rem 0 .2rem">«${p.title}»: фрагмент</h4>
+        <p class="muted" style="font-size:.88rem">${p.fragmentNote||'Несколько страниц'} — доступно всем, без покупки.</p>
+        <a class="btn btn--soft btn--sm" href="${p.fragment}" target="_blank" rel="noopener">Скачать фрагмент</a></div>`).join('');
+      const locked=dig.map(p=>`
         <div class="paper" style="opacity:.6"><span class="tag">После покупки</span>
-        <h4 style="margin:.5rem 0 .2rem">«Маруся и друзья»: все 24 страницы</h4>
-        <p class="muted" style="font-size:.88rem">Полный файл откроется здесь после оплаты раскраски.</p>
-        <a class="btn btn--ghost btn--sm" href="product.html?id=col-friends">Посмотреть раскраску</a></div>
-      </div>`,
+        <h4 style="margin:.5rem 0 .2rem">«${p.title}»: все ${p.pages} страниц</h4>
+        <p class="muted" style="font-size:.88rem">Полный файл откроется здесь после оплаты.</p>
+        <a class="btn btn--ghost btn--sm" href="product.html?id=${p.id}">Посмотреть</a></div>`).join('');
+      return `<h3>Мои цифровые материалы</h3>
+      <p class="muted">PDF-файлы становятся доступны сразу после оплаты — скачивать можно сколько угодно раз.</p>
+      <div class="grid grid--2">${free}${locked}</div>`;
+    })(),
     gifts:`<h3>Подарки</h3><div class="empty"><span class="empty__emoji">🎁</span>Здесь появятся подарочные сертификаты и наборы, которые вы отправили.</div>`,
     settings:`<h3>Настройки</h3>
       <div class="paper" style="max-width:520px">
