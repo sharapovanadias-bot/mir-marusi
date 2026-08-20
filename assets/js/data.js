@@ -74,32 +74,38 @@ MM.products = [
 
   /* ===== ДНЕВНИКИ ===== */
   {
-    id:'diary-my', type:'diaries', status:'soon',
-    title:'Мой дневник как у Маруси',
-    subtitle:'Дневник-анкета',
-    desc:'Дневник, в котором история Маруси становится твоей: вопросы, анкеты, страницы для рисунков.',
-    price:null, age:'6–9', ages:['6-7','8-9'], pages:null, format:'в разработке',
-    author:'Мир Маруси', cover:'assets/img/story/01_dnevnik.jpg', accent:'pink',
-    tags:['Дневники'], gift:false,
-    inside:['Готовится к выходу'],
-    helps:['письменную речь','привычку замечать свой день'],
+    id:'diary-secret', type:'diaries', status:'live',
+    title:'Дневник Маруси. Мой секретный блокнот',
+    subtitle:'Анкета, игры, мечты и страницы для подруг',
+    desc:'Сто страниц, которые заполняешь сама. Анкеты про себя, тесты, загадки, лабиринты, творческие задания и десять анкет для подруг — блокнот можно передавать из рук в руки. Цифровое издание: PDF для скачивания и печати дома.',
+    price:590, age:'6–9', ages:['6-7','8-9'], pages:100, format:'PDF · 170×230 мм',
+    digital:true, fileSize:'1,1 МБ',
+    author:'Надежда Шарапова', cover:'assets/img/diary/cover-diary.jpg', accent:'pink',
+    tags:['Дневники','Подарок'], gift:true, giftMax:1000,
+    inside:[
+      'Вход в дневник: имя, личный знак и три правила',
+      '«Это я»: автопортрет, палитра, созвездие, суперсила',
+      'Моя школа: парта, предмет-чемпион, «если бы я была директором»',
+      'Мои люди и мои мечты: семья, подруги, комната мечты, новая планета',
+      'Мои секреты: вход по секретному знаку и страницы под замок',
+      'Тесты про меня, загадки и головоломки: лабиринт Корички, шифры, отличия',
+      'Творческая лаборатория: придумай персонажа, свой язык, дом будущего',
+      'Дневник подруг: 10 анкет, которые заполняют друзья',
+      'Моя будущая я: письмо самой себе и страница достижений',
+      'Ответы на все загадки и головоломки'
+    ],
+    helps:['письменную речь','умение говорить о чувствах','фантазию','логику и внимание','уверенность в себе'],
     excerpt:null,
-    cross:{ text:'А пока — прочитай, с чего всё началось.', to:'book-ezhik', emoji:'📖' },
-    gallery:['assets/img/story/01_dnevnik.jpg','assets/img/story/n01_obeshanie.jpg']
-  },
-  {
-    id:'diary-secret', type:'diaries', status:'soon',
-    title:'Секретный дневник',
-    subtitle:'Только для своих',
-    desc:'Тот самый дневник, который прячут под подушку. Задуман, но ещё не сделан.',
-    price:null, age:'7–9', ages:['8-9'], pages:null, format:'в разработке',
-    author:'Мир Маруси', cover:'assets/img/story/12_shifr.jpg', accent:'blue',
-    tags:['Дневники'], gift:false,
-    inside:['Готовится к выходу'],
-    helps:['личные границы','фантазию'],
-    excerpt:null,
-    cross:{ text:'Шифры и секреты уже есть в книге.', to:'book-ezhik', emoji:'🔍' },
-    gallery:['assets/img/story/12_shifr.jpg']
+    cross:{ text:'Дневник начинается там, где заканчивается книга.', to:'book-two', emoji:'📖' },
+    gallery:[
+      'assets/img/diary/cover-diary.jpg',
+      'assets/img/diary/d-eto-ya.jpg',
+      'assets/img/diary/d-shkola.jpg',
+      'assets/img/diary/d-mechty.jpg',
+      'assets/img/diary/d-test.jpg',
+      'assets/img/diary/d-labirint.jpg',
+      'assets/img/diary/d-podrugi.jpg'
+    ]
   },
 
   /* ===== РАСКРАСКИ ===== */
@@ -375,7 +381,7 @@ MM.posts = [
   { id:'why-diaries', cat:'Для родителей', emoji:'👩', img:'assets/img/story/01_dnevnik.jpg',
     title:'Почему дети любят вести дневники?',
     lead:'Что происходит в голове ребёнка, когда он записывает свой день — и почему это важнее красивого почерка.',
-    date:'12 августа 2026', read:'6 мин', link:'diary-my' },
+    date:'12 августа 2026', read:'6 мин', link:'diary-secret' },
   { id:'first-book', cat:'Книги', emoji:'📚', img:'assets/img/story/03_azbuka_final.jpg',
     title:'Как выбрать первую «большую» книгу в 7 лет',
     lead:'Объём, шрифт, длина глав и главный признак того, что книга «пойдёт».',
