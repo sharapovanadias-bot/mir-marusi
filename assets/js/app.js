@@ -528,7 +528,7 @@ function initProduct(){
     <div class="grid grid--3">${p.helps.map(h=>`<div class="paper"><div class="hand" style="font-size:1.15rem;color:var(--brown)">Развивает</div><p style="margin:0">${esc(h)}</p></div>`).join('')}</div>
   </div>
   ${p.excerpt?`<div class="tabpanel" data-panel="excerpt"><div class="excerpt">${esc(p.excerpt).replace(/\n/g,'<br><br>')}</div></div>`:''}
-  <div class="tabpanel" data-panel="reviews">${reviewsPlaceholder()}</div>
+  <div class="tabpanel" data-panel="reviews">${reviewsPlaceholder(p.id)}</div>
 
   <section class="section section--tight">
     <div class="section-head"><h2>Похожие товары</h2></div>
@@ -558,7 +558,30 @@ function initProduct(){
 function catName(t){ return {books:'Книги',diaries:'Дневники',coloring:'Раскраски',games:'Игры и workbook',collection:'Коллекция',gifts:'Подарки'}[t]||'Каталог'; }
 function catHref(t){ return {books:'books.html',diaries:'diaries.html',coloring:'coloring.html',games:'games.html',collection:'collection.html',gifts:'gifts.html'}[t]||'books.html'; }
 
-function reviewsPlaceholder(){
+function reviewCard(r){
+  const when = r.date ? new Date(r.date).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}) : '';
+  const stars = r.rating ? '★'.repeat(r.rating)+'☆'.repeat(5-r.rating) : '';
+  const who = [esc(r.author||'Покупатель'), r.role==='child'&&r.childAge?`${r.childAge} лет`:'', esc(r.city||'')].filter(Boolean).join(', ');
+  return `<div class="review" style="margin-bottom:12px">
+    ${r.verified?'<span class="tag">Покупка подтверждена</span>':''}
+    ${stars?`<div style="color:var(--mustard);letter-spacing:2px" aria-label="Оценка: ${r.rating} из 5">${stars}</div>`:''}
+    <p style="margin:.5rem 0">${esc(r.text)}</p>
+    <p class="muted" style="margin:0;font-size:.86rem">${who}${when?' · '+when:''}</p>
+  </div>`;
+}
+
+function reviewsPlaceholder(productId){
+  const all = (typeof MM!=='undefined' && Array.isArray(MM.reviews)) ? MM.reviews : [];
+  const list = productId ? all.filter(r=>r.product===productId) : all;
+  if(list.length){
+    const parents = list.filter(r=>r.role!=='child'), kids = list.filter(r=>r.role==='child');
+    return `<div class="grid grid--2">
+      <div><h3 style="font-size:1.15rem">Отзывы родителей</h3>
+        ${parents.length?parents.map(reviewCard).join(''):'<p class="muted" style="font-size:.86rem">Пока нет.</p>'}</div>
+      <div><h3 style="font-size:1.15rem">Отзывы детей</h3>
+        ${kids.length?kids.map(reviewCard).join(''):'<p class="muted" style="font-size:.86rem">Пока нет.</p>'}</div>
+    </div>`;
+  }
   return `<div class="grid grid--2">
     <div>
       <h3 style="font-size:1.15rem">Отзывы родителей</h3>
