@@ -58,10 +58,33 @@ const ICON = {
    ============================================================ */
 const NAV = [
   ['Книги','books.html'],['Дневники','diaries.html'],['Раскраски','coloring.html'],
-  ['Игры','games.html'],['Мир Маруси','world.html'],['Коллекция','collection.html']
+  ['Игры','games.html'],['Сезоны','index.html#year','seasons'],
+  ['Мир Маруси','world.html'],['Коллекция','collection.html']
 ];
-/* «Год с Марусей» живёт на главной (#year) — в основное меню не выносим, чтобы не растить его до 7 пунктов */
-const NAV_MOBILE = NAV.concat([['Год с Марусей','index.html#year'],['Подарки','gifts.html'],['Персонажи','characters.html'],['О Марусе','about.html'],['Марусин журнал','blog.html'],['Контакты','contacts.html'],['Личный кабинет','account.html']]);
+/* «Сезоны» — выпадающий пункт: четыре сезона + ссылка на «Год с Марусей» на главной.
+   Так вселенная попадает в шапку, не растягивая меню на 10 пунктов. */
+const NAV_MOBILE = [
+  ['Книги','books.html'],['Дневники','diaries.html'],['Раскраски','coloring.html'],
+  ['Игры','games.html'],['Мир Маруси','world.html'],['Коллекция','collection.html'],
+  ['Год с Марусей','index.html#year'],['Подарки','gifts.html'],['Персонажи','characters.html'],
+  ['О Марусе','about.html'],['Марусин журнал','blog.html'],['Контакты','contacts.html'],
+  ['Личный кабинет','account.html']
+];
+
+/* пункты подменю «Сезоны» строятся из данных: закрытые сезоны не кликабельны */
+function seasonMenuItems(){
+  const now = (typeof currentSeason==='function') ? currentSeason() : '';
+  return MM.seasons.map(s=>{
+    const open = s.status==='open';
+    /* В меню бейдж означает «можно зайти». Текущий, но ещё не написанный сезон
+       (сейчас это лето) помечаем «скоро» — иначе пункт зовёт «сейчас», а клик не работает. */
+    const badge = !open ? '<span class="navdrop__badge navdrop__badge--soon">скоро</span>'
+                : (s.id===now ? '<span class="navdrop__badge">сейчас</span>' : '');
+    return open
+      ? `<a href="season.html?s=${s.id}" role="menuitem"><span aria-hidden="true">${s.emoji}</span> ${esc(s.title)}${badge}</a>`
+      : `<span class="navdrop__off" role="menuitem" aria-disabled="true"><span aria-hidden="true">${s.emoji}</span> ${esc(s.title)}${badge}</span>`;
+  }).join('') + '<a class="navdrop__all" href="index.html#year" role="menuitem">Весь год с Марусей →</a>';
+}
 
 function logoSVG(size=44){
   return `<svg class="logo__mark" viewBox="0 0 64 64" width="${size}" height="${size}" aria-hidden="true">
@@ -89,7 +112,12 @@ function buildHeader(active){
         </span>
       </a>
       <nav class="nav" aria-label="Основная навигация">
-        ${NAV.map(([t,h])=>`<a href="${h}" ${h===active?'class="is-active"':''}>${t}</a>`).join('')}
+        ${NAV.map(([t,h,kind])=>kind==='seasons'
+          ? `<div class="navdrop">
+               <button class="navdrop__btn" aria-expanded="false" aria-haspopup="true">${t}<span class="navdrop__chev" aria-hidden="true">▾</span></button>
+               <div class="navdrop__menu" role="menu">${seasonMenuItems()}</div>
+             </div>`
+          : `<a href="${h}" ${h===active?'class="is-active"':''}>${t}</a>`).join('')}
       </nav>
       <div class="header__tools">
         <button class="icon-btn" id="btn-search" aria-label="Поиск">${ICON.search}</button>
@@ -160,6 +188,17 @@ function buildHeader(active){
   $('[data-close-modal]').onclick = closeAll;
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeAll(); closeSearch(); $('#mmenu').classList.remove('is-on'); }});
   $('#search-input').addEventListener('input',e=>runSearch(e.target.value));
+
+  /* выпадающее меню «Сезоны»: клик — открыть/закрыть, hover на десктопе, Escape и клик вне — закрыть */
+  const drop=$('.navdrop');
+  if(drop){
+    const btn=$('.navdrop__btn',drop);
+    const setOpen=v=>{ drop.classList.toggle('is-open',v); btn.setAttribute('aria-expanded',v?'true':'false'); };
+    btn.addEventListener('click',e=>{ e.stopPropagation(); setOpen(!drop.classList.contains('is-open')); });
+    document.addEventListener('click',e=>{ if(!drop.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') setOpen(false); });
+    drop.addEventListener('focusout',()=>{ setTimeout(()=>{ if(!drop.contains(document.activeElement)) setOpen(false); },0); });
+  }
 }
 
 function openDrawer(id){ $('#scrim').classList.add('is-on'); $('#'+id).classList.add('is-on'); document.body.style.overflow='hidden'; }
@@ -772,15 +811,6 @@ function initAccount(){
    HOME rendering
    ============================================================ */
 function initHome(){
-  const locGrid=$('#map-grid');
-  if(locGrid){
-    locGrid.innerHTML = MM.locations.map(l=>`
-      <a class="loc reveal" href="world.html#${l.id}">
-        <span class="loc__emoji">${l.emoji}</span>
-        <h3>${l.title}</h3><p>${esc(l.desc)}</p>
-        <div class="loc__go">Заглянуть ${ICON.arrow.replace('<svg','<svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;display:inline;vertical-align:-2px"')}</div>
-      </a>`).join('');
-  }
   const bookGrid=$('#home-books');
   if(bookGrid){
     bookGrid.innerHTML = MM.products.filter(p=>p.type==='books').slice(0,4).map(productCard).join('');
